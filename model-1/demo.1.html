@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediAlert - Home</title>
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-green: #10b981;
+            --light-bg: #f0f9ff;
+            --white: #ffffff;
+            --dark-text: #1f2937;
+            --gray-text: #6b7280;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--white);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary-blue);
+            border: 2px solid var(--secondary-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary-blue);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--white) 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+            line-height: 1.2;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--gray-text);
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--primary-blue);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+            border-color: var(--secondary-blue);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            color: var(--gray-text);
+            font-size: 15px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 20px;
+            background-color: var(--light-bg);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .step {
+            background-color: var(--white);
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -16px;
+            left: 32px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 16px;
+            margin-bottom: 12px;
+        }
+
+        .step-desc {
+            color: var(--gray-text);
+            font-size: 15px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 20px;
+            background-color: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background-color: var(--light-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--gray-text);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .testimonial-role {
+            color: var(--secondary-blue);
+            font-size: 14px;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 20px;
+            background-color: var(--light-bg);
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--secondary-blue);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover:not(.featured) {
+            box-shadow: var(--shadow-md);
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background-color: var(--accent-green);
+            color: var(--white);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .plan-price {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--secondary-blue);
+            margin-bottom: 8px;
+        }
+
+        .plan-duration {
+            color: var(--gray-text);
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: var(--gray-text);
+            font-size: 15px;
+        }
+
+        .plan-features li:before {
+            content: "✓ ";
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 20px;
+            background-color: var(--white);
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background-color: var(--light-bg);
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #dbeafe;
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item input {
+            display: none;
+        }
+
+        .faq-item input:checked + .faq-question .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: var(--white);
+            padding: 0 20px;
+        }
+
+        .faq-item input:checked ~ .faq-answer {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: #9ca3af;
+            padding: 60px 20px 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #9ca3af;
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            nav {
+                gap: 20px;
+                font-size: 14px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-form input {
+                width: 100%;
+            }
+
+            .cta-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">💊 MediAlert</div>
+                <nav>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#faq">FAQ</a>
+                    <div class="nav-cta">
+                        <a href="#" class="btn btn-secondary">Sign In</a>
+                        <a href="#" class="btn btn-primary" onclick="window.location.href='///C:/Users/lmoor/medicine%20expiry%20alert/model-1/demo.1.1.html'">
+                            Get Started
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Never Miss a Medicine Expiration Date Again</h1>
+                <p class="hero-subtitle">Smart, automated tracking for your entire family's medication safety. Get timely alerts before medicines expire.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Start Your Free Trial</a>
+                    <a href="#" class="btn btn-secondary">Watch Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Automatic Scanning</h3>
+                    <p class="feature-desc">Simply photograph medicine labels to automatically add them to your inventory with accurate expiration dates.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3 class="feature-title">Timely Alerts</h3>
+                    <p class="feature-desc">Receive smart notifications weeks before expiration, ensuring you never use expired medications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Inventory Management</h3>
+                    <p class="feature-desc">Track all medications in one place with detailed logs, usage history, and quick access to medical information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧</div>
+                    <h3 class="feature-title">Family Sharing</h3>
+                    <p class="feature-desc">Share medication information securely with family members for coordinated healthcare management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Add Medications</h3>
+                    <p class="step-desc">Snap a photo of medicine labels or manually enter prescription details into your MediAlert account.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Automatic Tracking</h3>
+                    <p class="step-desc">Our system automatically monitors expiration dates and organizes your complete medication inventory.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Smart Notifications</h3>
+                    <p class="step-desc">Receive personalized alerts before medicines expire, giving you time to refill or dispose safely.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Stay Safe & Organized</h3>
+                    <p class="step-desc">Maintain a healthy household with organized medication management and professional healthcare coordination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Trusted by Healthcare Professionals</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"MediAlert has transformed how our family manages medications. The automatic tracking gives us peace of mind and saves time."</p>
+                    <p class="testimonial-author">Dr. Sarah Mitchell</p>
+                    <p class="testimonial-role">Pharmacist, Metro Health Clinic</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"An essential tool for elderly care. My parents now never accidentally use expired medications, and I can monitor everything remotely."</p>
+                    <p class="testimonial-author">James Chen</p>
+                    <p class="testimonial-role">Caregiver</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The alerts work perfectly. I've prevented my family from using several expired medications. Highly recommended for every household."</p>
+                    <p class="testimonial-author">Margaret Rodriguez</p>
+                    <p class="testimonial-role">Registered Nurse</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Free</h3>
+                    <p class="plan-price">₹0</p>
+                    <p class="plan-duration">Forever free</p>
+                    <ul class="plan-features">
+                        <li>Up to 10 medications</li>
+                        <li>Basic alerts</li>
+                        <li>Mobile app access</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <span class="badge">Most Popular</span>
+                    <h3 class="plan-name">Premium</h3>
+                    <p class="plan-price">₹199.99</p>
+                    <p class="plan-duration">per month</p>
+                    <ul class="plan-features">
+                        <li>Unlimited medications</li>
+                        <li>Advanced notifications</li>
+                        <li>Family sharing (2 members)</li>
+                        <li>Prescription refills</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">Start Free Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="plan-name">Family</h3>
+                    <p class="plan-price">₹299.99</p>
+                    <p class="plan-duration">per month</p>
+                    <ul class="plan-features">
+                        <li>Unlimited medications</li>
+                        <li>Advanced notifications</li>
+                        <li>Family sharing (6 members)</li>
+                        <li>Prescription refills</li>
+                        <li>Healthcare provider access</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <input type="checkbox" id="faq1">
+                    <label class="faq-question" for="faq1">
+                        <span>Is my medication data secure and private?</span>
+                        <span class="faq-toggle">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Yes, we use enterprise-grade encryption for all data. Your medication information is HIPAA-compliant and never shared without your explicit consent. Your privacy is our top priority.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <input type="checkbox" id="faq2">
+                    <label class="faq-question" for="faq2">
+                        <span>How accurate is the automatic label scanning?</span>
+                        <span class="faq-toggle">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Our AI-powered scanning technology has a 99% accuracy rate for standard pharmaceutical labels. You can always manually verify or edit information for peace of mind.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <input type="checkbox" id="faq3">
+                    <label class="faq-question" for="faq3">
+                        <span>Can I share medication info with family members?</span>
+                        <span class="faq-toggle">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Absolutely! Premium and Family plans include secure family sharing. You control exactly what information each family member can see and manage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <input type="checkbox" id="faq4">
+                    <label class="faq-question" for="faq4">
+                        <span>What happens after my free trial ends?</span>
+                        <span class="faq-toggle">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Your trial lasts 30 days with full access to all Premium features. When it ends, you'll revert to our Free plan unless you choose to subscribe. No surprise charges.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <input type="checkbox" id="faq5">
+                    <label class="faq-question" for="faq5">
+                        <span>Does MediAlert work with my pharmacy?</span>
+                        <span class="faq-toggle">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>MediAlert works with your existing pharmacy workflow. You can request prescription refills through the app, and we partner with major pharmacy networks for seamless integration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Take Control of Your Medication Safety?</h2>
+            <p class="cta-subtitle">Join thousands of users who trust MediAlert to keep their families safe.</p>
+            <form class="email-form">
+                <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                <button type="submit" class="btn btn-primary">Get Started Free</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MediAlert</h3>
+                    <p>Your trusted partner in medication safety and family health management.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Security</a>
+                    <a href="#">Compliance</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MediAlert Systems. All rights reserved. | Healthcare made simple and safe.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
